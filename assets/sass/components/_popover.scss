@@ -1,0 +1,14 @@
+.components-popover {
+  $b-popover: &;
+
+  &:not(.is-mobile) {
+    #{$b-popover}__content {
+      overflow-y: inherit;
+
+      .components-datetime__date {
+        padding-left: 8px;
+        border-top: none;
+      }
+    }
+  }
+}

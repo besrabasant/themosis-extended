@@ -1,0 +1,18 @@
+.themosis-extended-admin-page--loading {
+  opacity: 0;
+  background-color: #fff;
+}
+
+.components-button {
+  display: inline-block;
+}
+
+.components-popover:not(.is-mobile) .components-popover__content {
+  overflow-y: inherit;
+}
+
+.components-popover:not(.is-mobile) .components-popover__content .components-datetime__date {
+  padding-left: 8px;
+  border-top: none;
+}
+
