@@ -4,6 +4,7 @@ import {__TABLE_REACT_ROOT__} from "../Constants";
 import {Component} from 'react'
 import {createComponent} from "../component";
 import {AdminPageContainer} from "../components";
+import {dataParser} from "../utils";
 
 export class AdminTableRenderer extends ComponentRenderer {
     constructor() {
@@ -21,10 +22,11 @@ export class AdminTableRenderer extends ComponentRenderer {
              * @type {Component}
              */
             let TableComponent = createComponent('themosis.core.admintable')
+            let tableData = dataParser(this.RendererRoot.innerHTML)
 
             render(
                 <AdminPageContainer>
-                    <TableComponent/>
+                    <TableComponent tableData={tableData}/>
                 </AdminPageContainer>
                 , this.RendererRoot)
         }

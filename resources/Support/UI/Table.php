@@ -4,10 +4,15 @@ namespace Themosis\ThemosisExtended\Support\UI;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use League\Fractal\TransformerAbstract;
 use Themosis\ThemosisExtended\Constants\TextDomainContexts;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Themosis\ThemosisExtended\Support\Serializers\TableSerializer;
+use Themosis\ThemosisExtended\Support\Transformers\TableTransformer;
 
 /**
  * Class Table
@@ -20,14 +25,73 @@ abstract class Table
      */
     protected $items;
 
+    /**
+     * Table theme.
+     *
+     * @var string
+     */
+    protected $theme = "admin.tables";
+
+
+    /**
+     * @var Manager
+     */
+    protected $manager;
+
+    /**
+     * Table constructor.
+     */
     public function __construct() {
+        $this->setManager( new Manager() );
         $this->prepare();
+    }
+
+    /**
+     * @param Manager $manager
+     * @return Table
+     */
+    public function setManager( Manager $manager ): Table {
+        $this->manager = $manager;
+        return $this;
+    }
+
+    /**
+     * @return Manager
+     */
+    public function getManager(): Manager {
+        return $this->manager;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getItems(): Collection {
+        return $this->items;
+    }
+
+    /**
+     * @return TransformerAbstract
+     */
+    abstract public function getItemsTransformer(): TransformerAbstract;
+
+    /**
+     * @return TransformerAbstract
+     */
+    protected function getTableTransformer(): TransformerAbstract {
+        return new TableTransformer();
+    }
+
+    /**
+     * @return Item
+     */
+    protected function getResource(): Item {
+        return new Item( $this, $this->getTableTransformer() );
     }
 
     /**
      * @return array
      */
-    abstract protected function getColumns();
+    abstract public function getColumns(): array;
 
     /**
      * @return void
@@ -46,7 +110,7 @@ abstract class Table
         return array_keys( $this->getColumns() );
     }
 
-    private function getRows() {
+    public function getRows() {
         return $this->items->map( function ( $item, $key ) {
             return [
                 'item' => $item,
@@ -68,14 +132,17 @@ abstract class Table
         return $rowColumns;
     }
 
-    private function getTableProps() {
+    protected function getTableId() {
+        return Str::kebab( ( new \ReflectionClass( static::class ) )->getShortName() );
+    }
+
+    public function getTableAttributes() {
         // TODO: Make this a Data Transfer Object.
 
-        $classShortName = ( new \ReflectionClass( static::class ) )->getShortName();
-
         return (object)[
-            'name'          => Str::kebab( $classShortName ),
-            'empty_records' => $this->emptyRecords()
+            'id'            => $this->getTableId(),
+            'theme'         => $this->theme,
+            'empty_records' => $this->emptyRecords(),
         ];
     }
 
@@ -94,18 +161,41 @@ abstract class Table
     }
 
     /**
+     * @return Table
+     */
+    protected function serialize(): Table {
+        $this->manager->setSerializer( new TableSerializer() );
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array {
+        return $this->serialize()->getManager()->createData( $this->getResource() )->toArray();
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson(): string {
+        return $this->serialize()->getManager()->createData( $this->getResource() )->toJson();
+    }
+
+    /**
      * Renders Table.
      * @return Factory|\Illuminate\View\Factory|View
      */
     public function render() {
         $columns = $this->getColumns();
         $rows = $this->getRows();
-        $table_props = $this->getTableProps();
+        $attributes = $this->getTableAttributes();
 
-        return view( 'app.ui.table', [
-            'table_props' => $table_props,
-            'columns'     => $columns,
-            'rows'        => $rows,
+        return view( $this->theme . '.table', [
+            'attributes' => $attributes,
+            'columns'    => $columns,
+            'rows'       => $rows,
         ] );
     }
 }

@@ -76,7 +76,7 @@ abstract class BaseAdminView
      * @param $viewObject
      * @return Factory|\Illuminate\View\Factory|View
      *
-     * @todo Implement an generic interface.
+     * @todo Implement an base generic View interface.
      */
     abstract function render( $viewObject );
 }

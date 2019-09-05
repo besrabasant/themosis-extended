@@ -21,12 +21,15 @@ class AdminBodyClass extends Hookable
 
     public function register( $body_classes ) {
 
-//        if ( app()->environment( 'production', 'staging' ) && Request::has( 'page' ) ) {
         if ( Request::has( 'page' ) ) {
             $pages_repository = PagesRepository::getInstance();
 
             if ( $pages_repository->hasPage( Request::get( 'page' ) ) ) {
-                $body_classes .= ' themosis-extended-admin-page themosis-extended-admin-page--loading';
+                $body_classes .= ' themosis-extended-admin-page';
+
+                if(app()->environment('production', 'staging')) {
+                    $body_classes .= ' themosis-extended-admin-page--loading';
+                }
             }
         }
 

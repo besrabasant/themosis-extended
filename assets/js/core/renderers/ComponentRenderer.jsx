@@ -1,5 +1,3 @@
-import {__SIDEBAR_REACT_ROOT__, __HEADER_REACT_ROOT__} from "../Constants";
-
 /**
  * Component Renderer abstract class.
  */

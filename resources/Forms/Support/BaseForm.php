@@ -24,10 +24,14 @@ abstract class BaseForm implements Formidable
     protected $formData;
 
     /**
+     * @var string
+     */
+    protected $theme = 'admin.forms';
+
+    /**
      * @var array
      */
     protected $defaultOptions = [
-        'theme'      => 'admin.forms',
         'attributes' => [
             'class'      => 'form needs-validation',
             'novalidate' => true,
@@ -64,6 +68,18 @@ abstract class BaseForm implements Formidable
     }
 
     /**
+     * @param FieldFactoryInterface $fields
+     * @return \Themosis\Forms\Contracts\FieldTypeInterface
+     */
+    protected function getSubmitField( FieldFactoryInterface $fields ) {
+        return $fields->submit( 'form_submit', [
+            'label'  => $this->getFormSubmitLabel(),
+            'mapped' => false,
+            'group'  => FormGroups::SIDEBAR_CTA,
+        ] );
+    }
+
+    /**
      * Build your form.
      *
      * @param FormFactoryInterface $factory
@@ -72,8 +88,8 @@ abstract class BaseForm implements Formidable
      * @return FormInterface
      */
     public function build( FormFactoryInterface $factory, FieldFactoryInterface $fields ): FormInterface {
-
-        $form_options = array_merge( $this->defaultOptions, $this->getFormOptions() );
+        // Create form options
+        $form_options = array_merge( ['theme' => $this->theme], $this->defaultOptions, $this->getFormOptions() );
 
         $form_builder = $factory->make( $this->formData, $form_options );
 
@@ -81,14 +97,11 @@ abstract class BaseForm implements Formidable
             $form_builder->add( $field );
         }
 
-        $form_builder->add( $fields->submit( 'form_submit', [
-            'label'  => $this->getFormSubmitLabel(),
-            'mapped' => false,
-            'group'  => FormGroups::SIDEBAR_CTA,
-        ] ) );
+        $form_builder->add( $this->getSubmitField( $fields ) );
 
         $form = $form_builder->get();
 
+        // Remove prefix from fields.
         $form->setPrefix( '' );
 
         return $form;

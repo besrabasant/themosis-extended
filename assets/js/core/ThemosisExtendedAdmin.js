@@ -1,6 +1,5 @@
-import ComponentRegistry from './ComponentRegistry'
-import DataStoreRegistry from "./DataStoreRegistry"
-import {RenderFormFields} from "./renderFormFields"
+import ComponentRegistry from './registry/ComponentRegistry'
+import DataTableRegistry from "./registry/TableRegistry";
 import {removeBodyLoadingClass} from "./utils"
 import {AdminFormRenderer, AdminTableRenderer} from './renderers'
 import {NoticeAlerts} from "../components/NoticeAlerts";
@@ -9,7 +8,9 @@ import {NoticeAlerts} from "../components/NoticeAlerts";
  * @type {ComponentRegistry}
  */
 let componentRegistry = new ComponentRegistry()
-let dataStoreRegistry = new DataStoreRegistry()
+let dataTableRegistry = new DataTableRegistry()
+
+// Renderers
 let formRenderer = new AdminFormRenderer()
 let tableRenderer = new AdminTableRenderer()
 let noticeAlerts = new NoticeAlerts()
@@ -24,8 +25,6 @@ class ThemosisExtendedAdmin {
     static init(window) {
         formRenderer.render()
         tableRenderer.render()
-
-        // RenderFormFields()
 
         removeBodyLoadingClass(() => {
             noticeAlerts.init()
@@ -50,18 +49,19 @@ class ThemosisExtendedAdmin {
 
     /**
      *
-     * @param {String} DataStoreName
-     * @param {*} DataStoreOptions
+     * @param {string} TableID
+     * @param {*} TableRenderer
      */
-    static registerDataStore(DataStoreName, DataStoreOptions) {
-        dataStoreRegistry.registerDataStore(DataStoreName, DataStoreOptions)
+    static registerTable(TableID, TableRenderer) {
+        dataTableRegistry.registerTableRenderer(TableID, TableRenderer)
     }
 
     /**
-     * @returns {DataStoreRegistry}
+     *
+     * @returns {DataTableRegistry}
      */
-    static getDataStoreRegistry() {
-        dataStoreRegistry
+    static getDataTableRegistry() {
+        return dataTableRegistry
     }
 }
 
@@ -71,8 +71,8 @@ export const init = ThemosisExtendedAdmin.init
 
 export const registerComponent = ThemosisExtendedAdmin.registerComponent
 
-export const registerDataStore = ThemosisExtendedAdmin.registerDataStore
-
 export const getComponentRegistry = ThemosisExtendedAdmin.getComponentRegistry
 
-export const getDataStoreRegistry = ThemosisExtendedAdmin.getDataStoreRegistry
+export const registerTable = ThemosisExtendedAdmin.registerTable
+
+export const getDataTableRegistry = ThemosisExtendedAdmin.getDataTableRegistry

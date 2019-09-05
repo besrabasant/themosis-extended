@@ -1,4 +1,4 @@
-Themosis Extended
+Plugin boilerplate
 ==================
 
 Build your custom plugin using this Themosis framework plugin boilerplate.
