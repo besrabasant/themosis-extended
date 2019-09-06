@@ -1,0 +1,9 @@
+&__content {
+  position: absolute;
+  top: $admin-bar-height;
+  left: 0;
+  right: $admin-sidebar-width;
+  bottom: 0;
+  padding: 30px 30px;
+  overflow-y: auto;
+}

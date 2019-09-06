@@ -1,0 +1,64 @@
+&__form {
+  $b-admin-form: &;
+
+  display: flex;
+  justify-content: center;
+
+  .form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+
+&__field-group {
+  $b-form-field-group: &;
+
+  width: 100%;
+  max-width: 800px;
+
+  &:not(#{$b-form-field-group}--main) {
+    #{$b-form-group} {
+      padding-right: 30px;
+    }
+  }
+
+  &--meta-two-cols,
+  &--meta-three-cols,
+  &--meta-four-cols {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &--meta-two-cols {
+    #{$b-form-group} {
+      width: 1/2 * 100%;
+
+      &:nth-of-type(2n) {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &--meta-three-cols {
+    #{$b-form-group} {
+      width: 1/3 * 100%;
+
+      &:nth-of-type(3n) {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &--meta-four-cols {
+    #{$b-form-group} {
+      width: 25%;
+
+      &:nth-of-type(4n) {
+        padding-right: 0;
+      }
+    }
+  }
+}

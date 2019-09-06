@@ -6,6 +6,8 @@ import {FieldWrapper} from "./FieldWrapper";
 
 //TODO: Allow option to clear date.
 
+const DATE_FORMAT = 'YYYY-MM-DD'
+
 /**
  *
  * @param {Date} props.date
@@ -26,9 +28,9 @@ const DateTimeInputDropdown = ({date, setState, attributes}) => {
 
     if (!date) {
         if (attributes.value) {
-            date = moment(attributes.value).toDate()
+            date = moment(attributes.value, DATE_FORMAT).toDate()
         } else if (attributes.default) {
-            date = moment(attributes.default).toDate()
+            date = moment(attributes.default, DATE_FORMAT).toDate()
         } else {
             date = new Date();
         }

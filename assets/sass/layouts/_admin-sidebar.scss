@@ -1,0 +1,43 @@
+&__sidebar {
+  position: absolute;
+  z-index: 98;
+  top: $admin-bar-height;
+  right: 0;
+  bottom: 0;
+  border-left: 1px solid lighten($black, 80%);
+  width: $admin-sidebar-width;
+  background-color: $white;
+  padding: 0 15px;
+}
+
+&__sidebar-title {
+  background-color: $admin-sidebar-title-bg-color;
+  padding: 15px;
+  font-weight: bold;
+}
+
+&__sidebar-cta-slot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+
+  #{$b-form-group}--submit {
+    margin: 0;
+
+    .components-button {
+      height: 40px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+&__sidebar-fields-slot {
+  padding: 15px;
+}

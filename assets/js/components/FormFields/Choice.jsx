@@ -54,7 +54,6 @@ const DelegatedChoiceFieldComponent = ({attributes}) => {
 }
 
 export const ChoiceField = ({attributes}) => {
-
     return (attributes.options.group == 'sidebar-fields') ? (
         <DelegatedChoiceFieldComponent attributes={attributes}/>) : (<ChoiceFieldComponent attributes={attributes}/>)
 }

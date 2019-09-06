@@ -1,0 +1,23 @@
+.notice {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    color: inherit;
+    font-size: 1rem;
+    margin: 4px 0 0;
+    padding: 0 4px;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 30px;
+  }
+}

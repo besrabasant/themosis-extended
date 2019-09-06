@@ -1,0 +1,61 @@
+@keyframes adminNoticeAnimateIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0%);
+  }
+}
+
+.alert {
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border: $alert-border-width solid transparent;
+  background-color: $alert-bg-color-basic;
+  @include border-radius($alert-border-radius);
+  position: fixed;
+  z-index: 999;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+
+  &--animate-in {
+    animation: adminNoticeAnimateIn 0.4s ease-out 0.25s;
+  }
+
+  &--animated-in {
+    opacity: 1;
+    transform: translate(-50%, 0%);
+  }
+
+  p {
+    font-size: $font-size-base;
+  }
+
+  &__link {
+    font-weight: $alert-link-font-weight;
+  }
+
+  &__dismissible {
+    padding-right: $close-font-size + $alert-padding-x * 2;
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: $alert-padding-y $alert-padding-x;
+      color: inherit;
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    &--#{$color} {
+      @include alert-variant(theme-color-level($color, $alert-bg-level), theme-color-level($color, $alert-border-level), theme-color-level($color, $alert-color-level));
+      border-left: 4px solid theme-color-level($color, $alert-color-level);
+    }
+  }
+}

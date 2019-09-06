@@ -1,0 +1,20 @@
+&__header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: $admin-bar-height;
+  z-index: 99;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 2px 0 lighten($black, 80%);
+}
+
+&__title {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: $gray-600;
+}
