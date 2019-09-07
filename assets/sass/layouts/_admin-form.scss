@@ -3,6 +3,7 @@
 
   display: flex;
   justify-content: center;
+  height: 100%;
 
   .form {
     width: 100%;
@@ -23,6 +24,10 @@
     #{$b-form-group} {
       padding-right: 30px;
     }
+  }
+
+  &--main {
+    margin-bottom: 15px;
   }
 
   &--meta-two-cols,
@@ -60,5 +65,24 @@
         padding-right: 0;
       }
     }
+  }
+}
+
+.admin-form {
+  $b-admin-form: &;
+
+  .form--paged {
+    position: relative;
+  }
+
+  &__page {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

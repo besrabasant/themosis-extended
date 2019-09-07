@@ -10,9 +10,10 @@ use Themosis\Core\Application;
 use Themosis\Field\Contracts\FieldFactoryInterface;
 use Themosis\Field\Factory;
 use Themosis\Forms\Contracts\FieldTypeInterface;
-use Themosis\Forms\Fields\Types\BaseType;
 use Themosis\ThemosisExtended\Forms\Contracts\ExtendedFieldFactoryInterface;
 use Themosis\ThemosisExtended\Forms\Fields\Types\DateTime;
+use Themosis\ThemosisExtended\Forms\Fields\Types\FormPage;
+use Themosis\ThemosisExtended\Support\Facades\NewField;
 
 /**
  * This class extends Themosis Field Factory class by proxying the class.
@@ -62,23 +63,6 @@ class ExtendedFieldFactory implements FieldFactoryInterface, ExtendedFieldFactor
     private function getFieldFromFactory( string $fnName, string $name, array $options ): FieldTypeInterface {
         $field = $this->factory->{$fnName}( $name, $options );
         $field->setOptions( ['placeholder' => $field->getOption( 'label' )] );
-        return $field;
-    }
-
-    /**
-     * @param BaseType $field
-     * @param array $options
-     * @return FieldTypeInterface
-     */
-    private function buildField( BaseType $field, array $options ): FieldTypeInterface {
-
-        $field->setLocale( $this->app->getLocale() )
-            ->setManager( new Manager() )
-            ->setViewFactory( $this->viewFactory )
-            ->setOptions( $options );
-
-        $field->setOptions( ['placeholder' => $field->getOption( 'label' )] );
-
         return $field;
     }
 
@@ -219,11 +203,40 @@ class ExtendedFieldFactory implements FieldFactoryInterface, ExtendedFieldFactor
     }
 
     /**
+     * @param string $fieldClass
+     * @param string $fieldName
+     * @param array $options
+     * @return FieldTypeInterface
+     */
+    public function make( string $fieldClass, string $fieldName, array $options ): FieldTypeInterface {
+        $field = new $fieldClass( $fieldName );
+
+        $field->setLocale( $this->app->getLocale() )
+            ->setManager( new Manager() )
+            ->setViewFactory( $this->viewFactory )
+            ->setOptions( $options );
+
+        $field->setOptions( ['placeholder' => $field->getOption( 'label' )] );
+
+        return $field;
+    }
+
+    /**
      * @param string $name
      * @param array $options
      * @return FieldTypeInterface
      */
     public function datetime( string $name, array $options = [] ): FieldTypeInterface {
-        return $this->buildField( new DateTime( $name ), $options );
+        return $this->make( DateTime::class, $name, $options );
+    }
+
+
+    /**
+     * @param string $name
+     * @param array $options
+     * @return FieldTypeInterface
+     */
+    public function formpage( string $name = "", array $options = [] ): FieldTypeInterface {
+        return $this->make( FormPage::class, $name, $options );
     }
 }

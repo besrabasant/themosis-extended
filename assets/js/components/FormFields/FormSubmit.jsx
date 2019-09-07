@@ -6,7 +6,7 @@ import {useRef} from '@wordpress/element'
 
 const FormSubmitComponent = ({attributes, delegatedClickHandler}) => {
     return (
-        <FormGroup type={attributes.type}>
+        <FormGroup attributes={attributes}>
             <input type="submit" className="components-button is-button is-primary is-large" name={attributes.name}
                    id={attributes.attributes.id} value={attributes.label.inner} onClick={delegatedClickHandler}/>
         </FormGroup>

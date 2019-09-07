@@ -25,7 +25,7 @@ class AppServiceProvider extends BaseServiceProvider
 
         $this->app->bind( Pages::class, function ( Application $app ) {
             $pages = new Pages( $app );
-            $pages->setControllerNameSpace($this->plugin->getHeader('plugin_namespace'));
+            $pages->setControllerNameSpace( $this->plugin->getHeader( 'plugin_namespace' ) );
             return $pages;
         } );
 

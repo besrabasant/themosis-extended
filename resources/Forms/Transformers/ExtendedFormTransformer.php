@@ -4,6 +4,7 @@
 namespace Themosis\ThemosisExtended\Forms\Transformers;
 
 use Themosis\Forms\Contracts\FieldTypeInterface;
+use Themosis\Forms\Contracts\FormInterface;
 use Themosis\Forms\Resources\Transformers\FormTransformer;
 
 /**
@@ -12,6 +13,16 @@ use Themosis\Forms\Resources\Transformers\FormTransformer;
  */
 class ExtendedFormTransformer extends FormTransformer
 {
+
+    /**
+     * @var array
+     */
+    protected $defaultIncludes = [
+        'fields',
+        'groups',
+        'pages',
+    ];
+
     /**
      * @param FieldTypeInterface $form
      * @return array
@@ -30,6 +41,21 @@ class ExtendedFormTransformer extends FormTransformer
         return array_merge(
             $parentData,
             $extendedData
+        );
+    }
+
+    /**
+     * Include "pages" property to resource.
+     *
+     * @param FieldTypeInterface $form
+     *
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includePages( FieldTypeInterface $form ) {
+        /** @var FieldTypeInterface|FormInterface $form */
+        return $this->collection(
+            $form->repository()->pages(),
+            $form->getResourceTransformerFactory()->make( PageTransformer::class )
         );
     }
 }

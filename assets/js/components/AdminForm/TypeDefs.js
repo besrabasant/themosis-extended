@@ -24,6 +24,12 @@
  */
 
 /**
+ * @typedef FormPage
+ * @property {string} id
+ * @property {string} title
+ */
+
+/**
  * @typedef FormConfig
  * @property {string} name
  * @property {string} locale
@@ -39,4 +45,5 @@
  * @property {FormField[]} fields
  * @property {FormFieldGroup[]} groups
  * @property {FormValidation} validation
+ * @property {FormPage[]} pages
  */

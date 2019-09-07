@@ -10,8 +10,6 @@ import {createComponent} from "../../core/component";
 export function renderFields(fields, fieldGroup) {
     return fields.map((field, key) => {
 
-        // console.log(field)
-
         let FieldComponent = createComponent(field.component)
 
         if (!FieldComponent) {

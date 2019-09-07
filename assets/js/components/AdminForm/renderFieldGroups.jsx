@@ -11,7 +11,7 @@ import {renderFields} from "./renderFields";
  */
 export function renderFieldGroups(fieldGroups, fields) {
 
-    console.log(fieldGroups)
+    // console.log(fieldGroups)
 
     return fieldGroups.map((fieldGroup, key) => {
         return (

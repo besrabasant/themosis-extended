@@ -1,4 +1,18 @@
 .field {
+  $b-field: &;
+
+  &--required {
+    #{$b-field}__label {
+      &::after {
+        content: "*";
+        color: theme-color('danger');
+        position: relative;
+        left: 3px;
+        top: -3px;
+      }
+    }
+  }
+
   &__label {
     font-weight: 500;
   }
@@ -8,5 +22,11 @@
     color: $field-description-text-color;
     margin-top: 4px;
     line-height: 1.2;
+  }
+
+  &--editor {
+    .th-errors-list {
+      margin-top: 0.6em;
+    }
   }
 }

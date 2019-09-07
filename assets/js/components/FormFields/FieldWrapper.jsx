@@ -5,7 +5,7 @@ import {FormGroup} from "../Form/FormGroup";
 
 export const FieldWrapper = ({attributes, children}) => {
     return (
-        <FormGroup type={attributes.type}>
+        <FormGroup attributes={attributes} >
             <Label labelAttributes={attributes.label}/>
             {children}
             <FieldInfo info={attributes.options.info}/>

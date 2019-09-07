@@ -29,6 +29,11 @@ abstract class BaseForm implements Formidable
     protected $theme = 'admin.forms';
 
     /**
+     * @var string
+     */
+    protected $form_submit_field_name = 'form_submit';
+
+    /**
      * @var array
      */
     protected $defaultOptions = [
@@ -72,11 +77,18 @@ abstract class BaseForm implements Formidable
      * @return \Themosis\Forms\Contracts\FieldTypeInterface
      */
     protected function getSubmitField( FieldFactoryInterface $fields ) {
-        return $fields->submit( 'form_submit', [
+        return $fields->submit( $this->getFormSubmitFieldName(), [
             'label'  => $this->getFormSubmitLabel(),
             'mapped' => false,
             'group'  => FormGroups::SIDEBAR_CTA,
         ] );
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormSubmitFieldName(): string {
+        return $this->form_submit_field_name;
     }
 
     /**
@@ -103,6 +115,10 @@ abstract class BaseForm implements Formidable
 
         // Remove prefix from fields.
         $form->setPrefix( '' );
+
+        $form->setFormSubmitField( $this->getFormSubmitFieldName() );
+
+//        dd($form->repository());
 
         return $form;
     }

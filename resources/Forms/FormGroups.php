@@ -17,6 +17,7 @@ class FormGroups implements ArrayableContants
     const META_FOUR_COLS = 'meta-four-cols';
     const SIDEBAR_FIELDS = 'sidebar-fields';
     const SIDEBAR_CTA = 'sidebar-cta';
+    const PAGE = 'form-page';
 
     /**
      * @return array
@@ -29,6 +30,7 @@ class FormGroups implements ArrayableContants
             self::META_FOUR_COLS,
             self::SIDEBAR_FIELDS,
             self::SIDEBAR_CTA,
+            self::PAGE,
         ];
     }
 }
