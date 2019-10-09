@@ -2,22 +2,36 @@
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 
+  &__heading {
+    color: inherit;
+    font-size: 1.1rem;
+    margin: 10px 0 0;
+    padding: 0 7px;
+  }
+
   &__body {
     display: flex;
     justify-content: space-between;
+    padding-left: 8px;
   }
 
-  &__heading {
-    color: inherit;
-    font-size: 1rem;
-    margin: 4px 0 0;
-    padding: 0 4px;
+  &__content {
+    padding-top: 10px;
   }
 
   &__action {
+    flex: 0 0 auto;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     margin-left: 30px;
+    padding-bottom: 7px;
+    font-weight: 600;
+  }
+
+  &__action-btn {
+    height: 36px;
+    font-weight: 600;
+    border-radius: 3px;
   }
 }

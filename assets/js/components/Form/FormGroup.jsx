@@ -1,5 +1,15 @@
-export const FormGroup = ({attributes, children}) => {
-    let fieldRequiredClass = (attributes.attributes.required) ? ' field--required' : '';
+import classNames from "classnames"
 
-    return (<div className={`form-group form-group--${attributes.type} field field--${attributes.type}${fieldRequiredClass}`}>{children}</div>)
+export const FormGroup = ({attributes, children}) => {
+    let fieldClasses = classNames(
+        'form-group',
+        `form-group--${attributes.type}`,
+        `field`,
+        `field--${attributes.type}`,
+        `field--${attributes.basename}`
+        , {
+        'field--required': attributes.attributes.required
+    })
+
+    return (<div className={fieldClasses}>{children}</div>)
 }

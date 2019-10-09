@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
 use Themosis\Core\Application;
+use Themosis\Support\Facades\Filter;
 use Themosis\ThemosisExtended\Admin\Header;
 use Themosis\ThemosisExtended\Admin\Sidebar;
 
@@ -60,6 +61,10 @@ abstract class BaseAdminView
 
         $page = $this->app->get( $page_slug );
         $this->setTitle( $page->getMenu() );
+
+        Filter::add( 'admin_title', function () use ( $page ) {
+            return $this->header->getTitle() . " &#8249; " . $page->getTitle();
+        } );
     }
 
     /**

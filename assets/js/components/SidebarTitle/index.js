@@ -1,2 +1,2 @@
-import "./SidebarTitle"
-import './dataStore'
+export * from './SidebarTitle'
+

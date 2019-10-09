@@ -2,7 +2,7 @@
 
 namespace Themosis\ThemosisExtended\Hooks;
 
-use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
 use Themosis\Hook\Hookable;
 
 class PersistSessions extends Hookable
@@ -13,6 +13,12 @@ class PersistSessions extends Hookable
      * Extend WordPress.
      */
     public function register() {
-        $this->app->make( Session::class )->save();
+
+        /** @var Request $request */
+        $request = app( 'request' );
+
+        if ( is_admin() && $request->hasSession() ) {
+            $request->session()->save();
+        }
     }
 }

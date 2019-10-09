@@ -1,6 +1,22 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .themosis-extended-admin-page {
   &--loading {
     opacity: 0;
     background-color: #fff;
   }
+
+  .wp-editor {
+    width: 100%;
+  }
+}
+
+.theme-browser .theme .theme-name {
+  height: auto;
+}
+
+#titlediv #title-prompt-text {
+  padding: 2px 10px;
 }

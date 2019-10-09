@@ -1,5 +1,8 @@
-import {map} from "lodash"
+import {map, last, keys} from "lodash"
+import classNames from "classnames"
 import {useTableColumnComponent} from "../../core/hooks";
+import {TableExtraContentComponent as TableExtraContent} from "./TableExtraContent";
+import {Fragment} from '@wordpress/element'
 
 const TableRowsEmpty = ({attributes, columns}) => {
     return (
@@ -12,20 +15,30 @@ const TableRowsEmpty = ({attributes, columns}) => {
 }
 
 const TableRowsData = ({attributes, rows, columns}) => {
+    let lastColumnIndex = last(keys(columns))
+
     return map(rows, row => (
-        <tr key={`table-row-${row.id}`} className={`table__row table__row--${row.id}`}>
-            {map(columns, (columnName, columnKey) => {
+        <Fragment key={`table-row-${row.id}`}>
+            <tr className={`table__row table__row--${row.id}`}>
+                {map(columns, (columnName, columnKey) => {
 
-                let TableColumnRenderer = useTableColumnComponent(attributes.id, columnKey)
+                    let TableColumnRenderer = useTableColumnComponent(attributes.id, columnKey)
+                    let tableDataClasses = classNames('table__td table__column',
+                        `table__td--${columnKey} table__column--${columnKey}`,
+                        {
+                            'table__column--last': (columnKey === lastColumnIndex)
+                        })
 
-                return (
-                    <td key={`table-td-${columnKey}-${row.id}`}
-                        className={`table__td table__td--${columnKey} table__column table__column--${columnKey}`}>
-                        {TableColumnRenderer(row, columnKey)}
-                    </td>
-                )
-            })}
-        </tr>
+                    return (
+                        <td key={`table-td-${columnKey}-${row.id}`}
+                            className={tableDataClasses}>
+                            {TableColumnRenderer(row, columnKey)}
+                        </td>
+                    )
+                })}
+            </tr>
+            <TableExtraContent colSpan={columns.length} attributes={attributes} row={row}/>
+        </Fragment>
     ))
 }
 

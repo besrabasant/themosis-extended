@@ -5,15 +5,16 @@ namespace Themosis\ThemosisExtended\Forms\Fields\Types;
 
 
 use Themosis\Forms\Contracts\FieldTypeInterface;
-use Themosis\Forms\Fields\FieldsRepository;
 use Themosis\Forms\Fields\Types\BaseType;
-use Themosis\ThemosisExtended\Forms\FormGroups;
-use Themosis\ThemosisExtended\Forms\Transformers\FormPageFieldTransformer;
 
+/**
+ * Class FormPage
+ * @package Themosis\ThemosisExtended\Forms\Fields\Types
+ */
 class FormPage extends BaseType
 {
     /**
-     * PasswordType field view.
+     * FormPage field view.
      *
      * @var string
      */
@@ -49,7 +50,6 @@ class FormPage extends BaseType
     protected function setDefaultOptions() {
         return array_merge( $this->defaultOptions, [
             'mapped' => false,
-            //            'group' => FormGroups::PAGE,
         ] );
     }
 

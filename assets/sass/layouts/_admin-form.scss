@@ -23,7 +23,12 @@
   &:not(#{$b-form-field-group}--main) {
     #{$b-form-group} {
       padding-right: 30px;
+
+      &:only-child {
+        padding-right: 0;
+      }
     }
+
   }
 
   &--main {
@@ -68,21 +73,4 @@
   }
 }
 
-.admin-form {
-  $b-admin-form: &;
-
-  .form--paged {
-    position: relative;
-  }
-
-  &__page {
-    position: relative;
-    top: 0;
-    bottom: 0;
-    min-height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
+@import "admin-form-page";

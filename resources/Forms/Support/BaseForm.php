@@ -73,6 +73,13 @@ abstract class BaseForm implements Formidable
     }
 
     /**
+     * @return string
+     */
+    protected function getFormSubmitFieldGroup() {
+        return FormGroups::SIDEBAR_CTA;
+    }
+
+    /**
      * @param FieldFactoryInterface $fields
      * @return \Themosis\Forms\Contracts\FieldTypeInterface
      */
@@ -80,7 +87,7 @@ abstract class BaseForm implements Formidable
         return $fields->submit( $this->getFormSubmitFieldName(), [
             'label'  => $this->getFormSubmitLabel(),
             'mapped' => false,
-            'group'  => FormGroups::SIDEBAR_CTA,
+            'group'  => $this->getFormSubmitFieldGroup(),
         ] );
     }
 
@@ -101,7 +108,7 @@ abstract class BaseForm implements Formidable
      */
     public function build( FormFactoryInterface $factory, FieldFactoryInterface $fields ): FormInterface {
         // Create form options
-        $form_options = array_merge( ['theme' => $this->theme], $this->defaultOptions, $this->getFormOptions() );
+        $form_options = \array_merge_recursive( ['theme' => $this->theme], $this->defaultOptions, $this->getFormOptions() );
 
         $form_builder = $factory->make( $this->formData, $form_options );
 
@@ -117,8 +124,6 @@ abstract class BaseForm implements Formidable
         $form->setPrefix( '' );
 
         $form->setFormSubmitField( $this->getFormSubmitFieldName() );
-
-//        dd($form->repository());
 
         return $form;
     }

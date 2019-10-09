@@ -7,6 +7,8 @@
   }
 
   &__td {
+    $b-table-td: &;
+
     flex: 1;
 
     vertical-align: top;
@@ -14,6 +16,12 @@
       top: 15px;
       bottom: 15px;
     }
+
+    //&--extracontent {
+    //  @at-root td#{&} {
+    //    padding: 0;
+    //  }
+    //}
   }
 
   &__row {
@@ -22,7 +30,7 @@
     border-bottom: 1px solid $table-border-color;
 
     &--empty {
-      #{$b-table}__td{
+      #{$b-table}__td {
         padding: 1.5em 0;
         font-size: 1.5em;
         text-align: center;
@@ -62,6 +70,7 @@
             'delete': $danger,
             'edit': $info,
             'archive': $warning,
+            'unarchive': darken($warning, 15%),
     );
 
     @each $row_action, $color in $row_actions {
@@ -76,12 +85,87 @@
     }
   }
 
+  &__head {
+    border-bottom: 2px solid $gray-400;
+
+    #{$b-table}__row {
+      align-items: center;
+      min-height: 55px;
+    }
+  }
+
   &__body {
     #{$b-table}__row {
       &:hover {
         #{$b-table}__row-actions {
           opacity: 1;
         }
+      }
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__pagination {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+
+    &-total,
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-current {
+      vertical-align: center;
+
+      .form-control {
+        width: 60px;
+        height: $pagination-current-page-input-height;
+        text-align: center;
+      }
+    }
+
+    &-total {
+      font-weight: 500;
+      font-size: 14px;
+      padding: 0 10px;
+      height: $pagination-total-page-height;
+    }
+
+    .page-item {
+      margin: 0 5px;
+
+      &:first-child,
+      &:last-child {
+        .page-link {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .page-link {
+      height: $pagination-nav-item-height;
+      width: 45px;
+      font-size: 24px;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      .screen-reader-text {
+        transform: translateY(0px);
+        clip-path: none;
+        clip: auto;
+        width: inherit;
+        height: inherit;
+        text-align: center;
       }
     }
   }

@@ -14,10 +14,15 @@ export function renderFieldGroups(fieldGroups, fields) {
     // console.log(fieldGroups)
 
     return fieldGroups.map((fieldGroup, key) => {
-        return (
+        /**
+         * @type FormField[]
+         */
+        let fieldsInThisGroup = filter(fields, ['options.group', fieldGroup.id])
+
+        return (fieldsInThisGroup.length) ? (
             <FieldGroup key={`field-group-${key}`} fieldGroup={fieldGroup}>
-                {renderFields(filter(fields, ['options.group', fieldGroup.id]), fieldGroup)}
+                {renderFields(fieldsInThisGroup, fieldGroup)}
             </FieldGroup>
-        )
+        ) : null
     })
 }

@@ -11,6 +11,7 @@ use Themosis\ThemosisExtended\Support\Contracts\ArrayableContants;
  */
 class FormGroups implements ArrayableContants
 {
+    const DEFAULT = 'default';
     const MAIN = 'main';
     const META_TWO_COLS = 'meta-two-cols';
     const META_THREE_COLS = 'meta-three-cols';
@@ -24,6 +25,7 @@ class FormGroups implements ArrayableContants
      */
     public static function toArray(): array {
         return [
+            self::DEFAULT,
             self::MAIN,
             self::META_TWO_COLS,
             self::META_THREE_COLS,

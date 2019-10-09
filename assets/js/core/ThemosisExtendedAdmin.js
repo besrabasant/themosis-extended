@@ -1,8 +1,11 @@
 import ComponentRegistry from './registry/ComponentRegistry'
 import DataTableRegistry from "./registry/TableRegistry";
-import {removeBodyLoadingClass} from "./utils"
+import {removeBodyLoadingClass, createReducer, dataParser, createSwitchCase} from "./utils"
 import {AdminFormRenderer, AdminTableRenderer} from './renderers'
-import {NoticeAlerts} from "../components/NoticeAlerts";
+import {NoticeAlerts} from "../components/NoticeAlerts"
+import {createComponent, createComponentsFromConfig} from './component'
+import { apiFetch } from "../utils/apiFetch";
+import {REST_REQUEST} from "../utils/rest";
 
 /**
  * @type {ComponentRegistry}
@@ -15,8 +18,6 @@ let formRenderer = new AdminFormRenderer()
 let tableRenderer = new AdminTableRenderer()
 let noticeAlerts = new NoticeAlerts()
 
-
-// TODO: DataStore Registry marked for removal
 class ThemosisExtendedAdmin {
     /**
      *
@@ -63,7 +64,60 @@ class ThemosisExtendedAdmin {
     static getDataTableRegistry() {
         return dataTableRegistry
     }
+
+    /**
+     * @returns {createComponent}
+     */
+    static get createComponent() {
+        return createComponent
+    }
+
+    /**
+     * @returns {createComponentsFromConfig}
+     */
+    static get createComponentsFromConfig() {
+        return createComponentsFromConfig
+    }
+
+    /**
+     * Expost Wp Core apiFetch.
+     *
+     * @returns {apiFetch}
+     */
+    static get apiFetch() {
+        return apiFetch
+    }
+
+    /**
+     * @returns {{DELETE, POST, GET, OPTIONS, PUT}}
+     * @constructor
+     */
+    static get REST_REQUEST() {
+        return REST_REQUEST
+    }
+
+    /**
+     * @returns {createReducer}
+     */
+    static get createReducer() {
+        return createReducer
+    }
+
+    /**
+     * @returns {dataParser}
+     */
+    static get dataParser() {
+        return dataParser
+    }
+
+    /**
+     * @returns {createSwitchCase}
+     */
+    static get createSwitchCase() {
+        return createSwitchCase
+    }
 }
+
 
 export default ThemosisExtendedAdmin
 

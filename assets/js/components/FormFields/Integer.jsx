@@ -1,10 +1,11 @@
-import {registerComponent} from "../../core/ThemosisExtendedAdmin";
 import {FieldWrapper} from "./FieldWrapper";
 import {useState} from '@wordpress/element'
+import {SyntheticEvent} from 'react'
 
 export const IntegerField = ({attributes}) => {
 
     let [value, setValue] = useState((attributes.value || attributes.attributes.value))
+    let {class: classAttr, ...fieldAttributes} = attributes.attributes
 
     /**
      * @param {SyntheticEvent} event
@@ -15,16 +16,12 @@ export const IntegerField = ({attributes}) => {
 
     return (
         <FieldWrapper attributes={attributes}>
-            <input type="number" className="form-control" name={attributes.name} id={attributes.attributes.id}
+            <input type="number" className="form-control" name={attributes.name} 
                    onChange={onChange}
-                   min={attributes.attributes.min}
-                   step={attributes.attributes.step}
                    value={value}
-                   autoComplete="off"/>
+                   autoComplete="off"
+                   {...fieldAttributes}/>
         </FieldWrapper>
     )
 }
 
-registerComponent('themosis.fields.integer', {
-    renderProp: IntegerField
-})

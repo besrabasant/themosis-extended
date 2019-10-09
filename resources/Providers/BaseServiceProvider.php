@@ -65,7 +65,7 @@ abstract class BaseServiceProvider extends ServiceProvider
     /**
      * Registers plugin hooks.
      */
-    private function registerPluginHooks() {
+    protected function registerPluginHooks() {
         $hooks = Collection::make( $this->plugin->config( 'hooks' ) );
 
         ( new HooksRepository( $this->app ) )->load( $hooks->all() );
@@ -74,18 +74,18 @@ abstract class BaseServiceProvider extends ServiceProvider
     /**
      * Override base Themosis bindings.
      */
-    private function overrideBaseThemosisBindings() {
-        $this->app->singleton('form', function ($app) {
+    protected function overrideBaseThemosisBindings() {
+        $this->app->singleton( 'form', function ( $app ) {
             return new ExtendedFormFactory(
                 $app['validator'],
                 $app['view'],
                 $app['league.fractal'],
                 new Factory()
             );
-        });
+        } );
 
-        $this->app->singleton('field', function ($app) {
-            return new ExtendedFieldFactory($app, $app['view']);
-        });
+        $this->app->singleton( 'field', function ( $app ) {
+            return new ExtendedFieldFactory( $app, $app['view'] );
+        } );
     }
 }

@@ -1,0 +1,33 @@
+.field {
+  $b-field: &;
+
+  &--virtualmultiselect {
+    #{$b-field}__header {
+      display: flex;
+    }
+
+    #{$b-field}__stats {
+      width: 100px;
+      font-weight: 500;
+      color: $gray-700;
+      text-align: right;
+
+      .selections-count {
+        color: darken($warning, 5%);
+      }
+    }
+
+    #{$b-field}__filters {
+      flex: 1;
+      display: flex;
+      margin-top: 15px;
+    }
+
+    #{$b-field}__body {
+      &--virtual-list {
+        height: 600px;
+        position: relative;
+      }
+    }
+  }
+}

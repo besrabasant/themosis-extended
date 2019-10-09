@@ -1,0 +1,94 @@
+@mixin action-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.repeater-field {
+  position: relative;
+  padding-top: 15px;
+
+  &__content {
+    padding-top: 15px;
+    border-top: 1px solid $gray-200;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $gray-200;
+  }
+
+  &__add-item-action {
+    position: absolute;
+    right: 0;
+    top: -36px;
+
+    &.button {
+      @include action-btn;
+
+      .dashicons {
+        color: $success;
+      }
+
+      &:disabled {
+        .dashicons {
+          color: lighten($success, 30%);
+        }
+      }
+    }
+  }
+
+  &__item_index {
+    position: absolute;
+    width: 30px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__item-content {
+    flex: 1;
+    padding-right: 15px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+
+    .field {
+      margin-right: 30px;
+    }
+  }
+
+  &__item-actions {
+    flex: 0;
+  }
+
+  &__item-action {
+
+    &.button {
+      @include action-btn;
+    }
+
+
+    &--delete {
+      .dashicons {
+        color: $danger;
+      }
+
+      &:disabled {
+        .dashicons {
+          color: lighten($danger, 30%);
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
 /* global addLoadEvent */
 
-import ThemosisExtendedAdmin  from "./core/ThemosisExtendedAdmin"
+import './utils/dd'
+import * as ThemosisExtendedAdminComponents from "./components";
+import './components/register'
+import './components/datastores'
+import ThemosisExtendedAdmin from "./core/ThemosisExtendedAdmin"
 
-import './components'
+window.ThemosisExtendedAdminComponents = ThemosisExtendedAdminComponents
 
 window.ThemosisExtendedAdmin = ThemosisExtendedAdmin
 
@@ -11,6 +15,3 @@ function initThemosisExtendAdmin() {
 }
 
 addLoadEvent(initThemosisExtendAdmin.bind(window))
-
-
-

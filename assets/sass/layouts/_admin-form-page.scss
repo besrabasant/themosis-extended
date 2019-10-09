@@ -1,0 +1,88 @@
+.admin-form {
+  $b-admin-form: &;
+
+  .form--paged {
+    position: relative;
+  }
+
+  &__page {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--last {
+      margin-bottom: 100px;
+    }
+
+  }
+
+  &__page-title {
+    width: 450px;
+    align-self: flex-start;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+    color: $gray-500;
+    padding: 0 10px;
+  }
+
+  &__page-nav {
+    position: fixed;
+    right: $admin-sidebar-width + 30px;
+    bottom: 30px;
+    z-index: 9999;
+  }
+}
+
+$nav-btn-size: 40px;
+$nav-arrow-size: 14px;
+$nav-arrow-offset: 16px;
+
+.admin-form-nav {
+  height: $nav-btn-size;
+  width: $nav-btn-size;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px 0 rgba($gray-900, 0.3);
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    border-right: 3px solid $gray-600;
+    border-top: 3px solid $gray-600;
+    width: $nav-arrow-size;
+    height: $nav-arrow-size;
+  }
+
+  &--inactive {
+    opacity: 0.3;
+    pointer-events: none;
+    box-shadow: none;
+    border: 1px solid rgba($gray-900, 0.3);
+  }
+
+  &--prev {
+    margin-bottom: 15px;
+
+    &::before {
+      transform: rotate(-45deg);
+      top: $nav-arrow-offset;
+    }
+  }
+
+  &--next {
+    &::before {
+      transform: rotate(135deg);
+      bottom: $nav-arrow-offset;
+    }
+  }
+}

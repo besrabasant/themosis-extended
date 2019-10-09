@@ -12,8 +12,8 @@ use Themosis\Field\Factory;
 use Themosis\Forms\Contracts\FieldTypeInterface;
 use Themosis\ThemosisExtended\Forms\Contracts\ExtendedFieldFactoryInterface;
 use Themosis\ThemosisExtended\Forms\Fields\Types\DateTime;
+use Themosis\ThemosisExtended\Forms\Fields\Types\ExtendedChoiceType;
 use Themosis\ThemosisExtended\Forms\Fields\Types\FormPage;
-use Themosis\ThemosisExtended\Support\Facades\NewField;
 
 /**
  * This class extends Themosis Field Factory class by proxying the class.
@@ -135,7 +135,14 @@ class ExtendedFieldFactory implements FieldFactoryInterface, ExtendedFieldFactor
      * @return FieldTypeInterface
      */
     public function choice( string $name, array $options = [] ): FieldTypeInterface {
-        return $this->getFieldFromFactory( 'choice', $name, $options );
+        $field =  (new ExtendedChoiceType($name))
+            ->setLocale($this->app->getLocale())
+            ->setViewFactory($this->viewFactory)
+            ->setOptions($options);
+
+        $field->setOptions( ['placeholder' => $field->getOption( 'label' )] );
+
+        return $field;
     }
 
     /**
@@ -209,6 +216,7 @@ class ExtendedFieldFactory implements FieldFactoryInterface, ExtendedFieldFactor
      * @return FieldTypeInterface
      */
     public function make( string $fieldClass, string $fieldName, array $options ): FieldTypeInterface {
+        /** @var FieldTypeInterface $field */
         $field = new $fieldClass( $fieldName );
 
         $field->setLocale( $this->app->getLocale() )

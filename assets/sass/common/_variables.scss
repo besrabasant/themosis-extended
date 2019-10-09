@@ -3,23 +3,43 @@
 $white: #ffffff;
 $black: #000000;
 $blue: #0000ff;
+$wordpress-admin-primary: #0085ba;
 
-// Global
+$theme-colors: (
+        'primary': $wordpress-admin-primary,
+);
+
+
+/**************************
+* Global
+***************************/
 $body-bg: #f1f1f1; // Default WP background color
 
-//Fonts
+/**************************
+* Links
+***************************/
+
+/**************************
+* Fonts
+***************************/
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 $font-size-base: 0.85rem;
 
-// Alerts
+/**************************
+* Alerts
+***************************/
 $alert-padding-y: 0.2rem;
 $alert-border-radius: 0;
 $alert-bg-color-basic: lighten($black, 80%);
 
-// Buttons
-$btn-border-radius: 4px;
+/**************************
+* Buttons
+***************************/
+$btn-border-radius: 3px;
 
-// Form & Inputs
+/**************************
+* Forms & Form Inputs
+***************************/
 $input-border-radius: 0;
 $input-border-radius-lg: 0;
 $input-border-radius-sm: 0;
@@ -27,11 +47,22 @@ $input-focus-box-shadow: none;
 
 $form-feedback-font-size: 90%;
 
-// Fields
+/**************************
+* Fields
+***************************/
 $field-description-text-color: lighten($black, 50%);
 
-// Admin page
+/**************************
+* Admin page
+***************************/
 $admin-bar-height: 56px;
 $admin-sidebar-width: 400px;
 $admin-sidebar-title-bg-color: lighten($blue, 47%);
 
+/**************************
+* Admin Table
+***************************/
+$pagination-height: 30px;
+$pagination-current-page-input-height: $pagination-height;
+$pagination-total-page-height: $pagination-height;
+$pagination-nav-item-height: $pagination-height;

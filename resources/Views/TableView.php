@@ -15,10 +15,15 @@ use Themosis\ThemosisExtended\Support\UI\Table;
 class TableView extends BaseAdminView
 {
     /**
-     * @param Table $table
+     * @param Table | string $table
      * @return Factory|\Illuminate\View\Factory|View
      */
     public function render( $table ) {
+
+        if ( !( $table instanceof Table ) ) {
+            $table = new $table;
+        }
+
         return view( 'admin.table', ['header' => $this->header, 'table' => $table, 'sidebar' => $this->sidebar] );
     }
 }

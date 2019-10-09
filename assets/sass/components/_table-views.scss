@@ -1,0 +1,42 @@
+.table-views {
+  $b-table-views: &;
+
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 12px;
+
+  & > div {
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  &__item {
+    padding: 0 7px;
+    border-right: 1px solid $gray-500;
+
+    &--active {
+      #{$b-table-views}__link {
+        &,
+        &:hover {
+          color: darken($orange, 10%);
+        }
+      }
+    }
+  }
+
+  &__link {
+    &,
+    &:hover {
+      font-weight: 500;
+      color: $gray-700;
+      font-size: 13px;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

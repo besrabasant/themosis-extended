@@ -15,6 +15,3 @@ export const SidebarTitle = ({attributes}) => {
 }
 
 
-registerComponent('themosis.core.sidebartitle', {
-    renderProp: SidebarTitle
-})

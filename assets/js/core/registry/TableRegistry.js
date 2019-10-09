@@ -27,9 +27,14 @@ export default function DataTableRegistry() {
         registry.unregister(TableIds)
     }
 
+    function getAllTables() {
+        return registry.getAll()
+    }
+
     return {
         registerTableRenderer,
         getTableRenderer,
+        getAllTables,
         unregisterTableRenderer
     }
 }

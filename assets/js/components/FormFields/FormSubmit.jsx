@@ -1,28 +1,29 @@
-import {registerComponent} from "../../core/ThemosisExtendedAdmin";
 import {FormGroup} from "../Form/FormGroup";
 import {SidebarCtaFill} from "../../core/slotfills";
 import {useRef} from '@wordpress/element'
 
 
-const FormSubmitComponent = ({attributes, delegatedClickHandler}) => {
+const FormSubmitComponent = ({attributes, delegatedCallback}) => {
+    let {class: classAttr, ...fieldAttributes} = attributes.attributes
     return (
         <FormGroup attributes={attributes}>
             <input type="submit" className="components-button is-button is-primary is-large" name={attributes.name}
-                   id={attributes.attributes.id} value={attributes.label.inner} onClick={delegatedClickHandler}/>
+                   value={attributes.label.inner} onClick={delegatedCallback}
+                   {...fieldAttributes}/>
         </FormGroup>
     )
 }
 
 
 FormSubmitComponent.defaultProps = {
-    delegatedClickHandler: () => {
+    delegatedCallback: () => {
     }
 }
 
 const DelegatedFormSubmitComponent = ({attributes}) => {
     const submitEl = useRef(null);
 
-    const delegatedClickHandler = () => {
+    const delegatedCallback = () => {
         submitEl.current.click()
     }
 
@@ -31,7 +32,7 @@ const DelegatedFormSubmitComponent = ({attributes}) => {
             <input type="submit" ref={submitEl} style={{display: 'none'}} name={attributes.name}
                    id={attributes.attributes.id}/>
             <SidebarCtaFill>
-                <FormSubmitComponent attributes={attributes} delegatedClickHandler={delegatedClickHandler}/>
+                <FormSubmitComponent attributes={attributes} delegatedCallback={delegatedCallback}/>
             </SidebarCtaFill>
         </>
     )
@@ -44,7 +45,3 @@ export const FormSubmit = ({attributes}) => {
         :
         (<FormSubmitComponent attributes={attributes}/>)
 }
-
-registerComponent('themosis.fields.submit', {
-    renderProp: FormSubmit
-})

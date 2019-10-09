@@ -90,7 +90,7 @@ class ExtendedFormBuilder extends FormBuilder
      */
     private function addFieldToRespository( FieldTypeInterface $field ) {
 
-        if ( $field->getType() !== 'submit' && static::$page ) {
+        if ( static::$page ) {
             $field->setOptions( ['page' => static::$page] );
         }
 

@@ -1,3 +1,9 @@
 .components-button {
   display: inline-block;
 }
+
+.btn {
+  &:focus {
+    box-shadow: none;
+  }
+}

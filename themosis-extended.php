@@ -2,14 +2,14 @@
 
 /**
  * Plugin Name: Themosis Extended
- * Plugin URI: http://www.domain.tld
+ * Plugin URI: https://github.com/besrabasant/themosis-extended
  * Plugin Prefix: themosis_extended
  * Plugin Namespace: Themosis\ThemosisExtended
  * Plugin ID: themosis-extended
  * Description: Themosis Extended
  * Version: 1.0.0
  * Author: Basant Besra
- * Author URI: https://framework.themosis.com/
+ * Author URI: https://besrabasant.github.io/
  * Text Domain: themosis-extented
  * Domain Path: languages
  * Domain Var: TH_EXTENDED_TD
@@ -19,7 +19,7 @@
 
 use Themosis\Core\Application;
 
-define('TH_EXTENDED_TD', 'themosis-extented');
+define( 'TH_EXTENDED_TD', 'themosis-extented' );
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ define('TH_EXTENDED_TD', 'themosis-extented');
 | We bootstrap the plugin. The following code is loading your plugin
 | configuration and resources.
 */
-$plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
+$plugin = ( Application::getInstance() )->loadPlugin( __FILE__, 'config' );
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +41,8 @@ $plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
 | and its value the "Text Domain" header.
 */
 load_themosis_plugin_textdomain(
-    $plugin->getHeader('text_domain'),
-    $plugin->getPath($plugin->getHeader('domain_path'))
+    $plugin->getHeader( 'text_domain' ),
+    $plugin->getPath( $plugin->getHeader( 'domain_path' ) )
 );
 
 /*
@@ -54,9 +54,9 @@ load_themosis_plugin_textdomain(
 | locations as you want. The key is your asset directory path and
 | the value is its public URL.
 */
-$plugin->assets([
-    $plugin->getPath('dist') => $plugin->getUrl('dist')
-]);
+$plugin->assets( [
+    $plugin->getPath( 'dist' ) => $plugin->getUrl( 'dist' ),
+] );
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ $plugin->assets([
 | Register the plugin "views" directory. You can configure the list of
 | view directories from the "config/prefix_plugin.php" configuration file.
 */
-$plugin->views($plugin->config('plugin.views', []));
+$plugin->views( $plugin->config( 'plugin.views', [] ) );
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ $plugin->views($plugin->config('plugin.views', []));
 | Register the plugin "views" directory. You can configure the list of
 | view directories from the "config/prefix_plugin.php" configuration file.
 */
-$plugin->providers($plugin->config('plugin.providers', []));
+$plugin->providers( $plugin->config( 'plugin.providers', [] ) );
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +87,6 @@ $plugin->providers($plugin->config('plugin.providers', []));
 | an "inc" directory within the plugin. Use that "inc" directory to extend
 | your WordPress application. Nested files are also included.
 */
-$plugin->includes([
-    $plugin->getPath('inc')
-]);
+$plugin->includes( [
+    $plugin->getPath( 'inc' ),
+] );

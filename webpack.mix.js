@@ -36,9 +36,10 @@ mix.setPublicPath('dist')
     .js('assets/js/themosis-extended.js', 'dist/js')
     .react('assets/js/themosis-extended-admin.js', 'dist/js')
     .sass('assets/sass/themosis-extended.scss', 'dist/css')
-    .sass('assets/sass/themosis-extended-admin.scss', 'dist/css');
+    .sass('assets/sass/themosis-extended-admin.scss', 'dist/css')
+    .copyDirectory('assets/tinymce', 'dist/tinymce');
 
-if(!mix.inProduction()) {
+if (!mix.inProduction()) {
     mix.sourceMaps()
 }
 

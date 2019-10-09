@@ -3,8 +3,15 @@
 /**
  * Plugin Hooks that extends Hookable class.
  */
+
+use Themosis\ThemosisExtended\Hooks\AdminBodyClass;
+use Themosis\ThemosisExtended\Hooks\AdminNotices;
+use Themosis\ThemosisExtended\Hooks\PersistSessions;
+use Themosis\ThemosisExtended\Hooks\UserNotices;
+
 return [
-    \Themosis\ThemosisExtended\Hooks\PersistSessions::class,
-    \Themosis\ThemosisExtended\Hooks\AdminNotices::class,
-    \Themosis\ThemosisExtended\Hooks\AdminBodyClass::class,
+    PersistSessions::class,
+    UserNotices::class,
+    AdminNotices::class,
+    AdminBodyClass::class,
 ];

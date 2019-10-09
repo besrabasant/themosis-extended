@@ -19,14 +19,40 @@
 
   &__description {
     font-weight: 400;
-    color: $field-description-text-color;
+    color: $gray-600;
     margin-top: 4px;
     line-height: 1.2;
+    font-size: 16px;
   }
 
   &--editor {
     .th-errors-list {
       margin-top: 0.6em;
+    }
+  }
+
+  &--checkbox {
+    #{$b-field}__label {
+      margin-left: 10px;
+    }
+  }
+
+  &--choice {
+    #{$b-field}__choice-group {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #{$b-field}__choice-item {
+      margin-right: 30px;
+    }
+
+    #{$b-field}__choice-item-input {
+      transform: translateY(-2px);
+    }
+
+    #{$b-field}__choice-item-label {
+      font-size: 16px;
     }
   }
 }

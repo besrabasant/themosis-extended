@@ -1,4 +1,3 @@
-import {registerComponent} from '../../core/ThemosisExtendedAdmin'
 import {__experimentalGetSettings, format, isInTheFuture} from "@wordpress/date";
 import {DatePicker, Dropdown} from "@wordpress/components";
 import {withState} from "@wordpress/compose";
@@ -40,6 +39,8 @@ const DateTimeInputDropdown = ({date, setState, attributes}) => {
         setState({date})
     }
 
+    let {readonly, class: className, ...fieldAttributes} = attributes.attributes;
+
     return (
         <FieldWrapper attributes={attributes}>
             <Dropdown
@@ -51,11 +52,13 @@ const DateTimeInputDropdown = ({date, setState, attributes}) => {
                     <>
                         <input type="hidden" name={attributes.name}
                                value={(attributes.options.allow_null) ? "" : format('Y-m-d', date)}/>
-                        <input id={attributes.attributes.id} className='form-control' onClick={onToggle} type="text"
-                               name={`${attributes.name}__human`} readOnly={attributes.attributes.readonly}
+                        <input className='form-control' onClick={onToggle} type="text"
+                               name={`${attributes.name}__human`}
                                onChange={() => {
                                }}
-                               value={(attributes.options.allow_null) ? "" : format('d/m/Y', date)}/>
+                               value={(attributes.options.allow_null) ? "" : format('d/m/Y', date)}
+                               readOnly={readonly}
+                               {...fieldAttributes} />
                     </>
                 )}
                 renderContent={() => (
@@ -75,6 +78,3 @@ export const DateTimeInput = withState({
     date: null,
 })(DateTimeInputDropdown);
 
-registerComponent('themosis.fields.datetime', {
-    renderProp: DateTimeInput
-})

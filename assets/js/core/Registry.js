@@ -41,9 +41,14 @@ export function createRegistry(initialState) {
         return undefined
     }
 
+    function getAll() {
+        return registry
+    }
+
     return {
         register,
         unregister,
         get,
+        getAll,
     }
 }
